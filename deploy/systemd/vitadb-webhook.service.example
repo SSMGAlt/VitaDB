@@ -1,0 +1,23 @@
+# Template. The deploy guide gives a command that fills in __USER__/__HOME__
+# automatically and installs the real file to /etc/systemd/system/. This copy
+# is kept in the repo for reference, or if you'd rather edit it by hand.
+
+[Unit]
+Description=VitaDB GitHub webhook listener (auto-deploy)
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=__USER__
+WorkingDirectory=__HOME__/vitadb/VitaDB
+EnvironmentFile=__HOME__/vitadb/vitadb.env
+ExecStart=/usr/bin/python3 __HOME__/vitadb/VitaDB/deploy/webhook_listener.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

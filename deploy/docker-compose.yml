@@ -1,0 +1,51 @@
+# VitaDB deploy stack.
+#
+# Normally you don't run this file directly - use deploy/update.sh, which
+# sets the right flags for you. For reference, it's equivalent to:
+#   docker compose -f deploy/docker-compose.yml --env-file ../vitadb.env up -d --build
+#
+# Expected layout on the server (see the deploy guide for full setup):
+#   ~/vitadb/VitaDB/        <- this git repo (this file lives at deploy/docker-compose.yml)
+#   ~/vitadb/vitadb.env     <- secrets, NOT in git (copy from deploy/.env.example)
+#   ~/vitadb/config.php     <- real DB credentials, NOT in git, overlaid onto
+#                              the repo's own (placeholder) config.php below
+
+services:
+  vitadb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vitadb-app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      # Bound to localhost only. Cloudflare Tunnel talks to this - nothing
+      # else needs to, and nothing else can from outside this machine.
+      - "127.0.0.1:3050:80"
+    volumes:
+      - ..:/var/www/html
+      - ../../config.php:/var/www/html/config.php:ro
+      - vitadb_screenshots:/customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/screenshots
+      - vitadb_icons:/customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/icons
+      - vitadb_avatars:/customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars
+
+  db:
+    image: mariadb:10.11
+    container_name: vitadb-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - vitadb_db_data:/var/lib/mysql
+    # Not published to the host on purpose - only the vitadb service reaches
+    # it, over the compose network, as hostname "db" (see config.php).
+
+volumes:
+  vitadb_db_data:
+  vitadb_screenshots:
+  vitadb_icons:
+  vitadb_avatars:
