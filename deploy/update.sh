@@ -32,6 +32,10 @@ echo "[update.sh] Resetting working tree to origin/$BRANCH..."
 git reset --hard "origin/$BRANCH"
 
 echo "[update.sh] Building and starting containers..."
+# docker-compose.yml's db healthcheck + the app's "condition: service_healthy"
+# dependency mean this blocks until MariaDB is actually accepting
+# connections (not just "container exists") - safe to run a mysql import
+# immediately after this script finishes, even on a fresh/wiped volume.
 docker compose -f deploy/docker-compose.yml --env-file "$ENV_FILE" up -d --build
 
 echo "[update.sh] Removing dangling images..."

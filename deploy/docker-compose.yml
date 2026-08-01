@@ -18,7 +18,8 @@ services:
     container_name: vitadb-app
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       # Bound to localhost only. Cloudflare Tunnel talks to this - nothing
       # else needs to, and nothing else can from outside this machine.
@@ -43,6 +44,16 @@ services:
       - vitadb_db_data:/var/lib/mysql
     # Not published to the host on purpose - only the vitadb service reaches
     # it, over the compose network, as hostname "db" (see config.php).
+    healthcheck:
+      # On a fresh volume, MariaDB has to build its system tables before it
+      # starts listening at all - this can take anywhere from a few seconds
+      # to over a minute depending on the disk. `$$` (not `$`) is needed here
+      # so the container's own shell expands it, not docker compose.
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
 
 volumes:
   vitadb_db_data:
