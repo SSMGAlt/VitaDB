@@ -1,0 +1,42 @@
+name: CodeQL
+
+# NOTE: CodeQL does not support PHP (GitHub confirms this explicitly in their
+# docs). Most of this app's actual attack surface - submit.php, register.php,
+# login.php, avatar.php/icon0.php/screenshots.php, etc. - is PHP and is NOT
+# covered by this workflow. This only analyzes the client-side JavaScript
+# (app.js, the *.controller.js files). Consider a PHP-aware SAST tool
+# (e.g. Semgrep with the p/php or p/security-audit rulesets, or Psalm/PHPStan
+# for general static analysis) to cover the backend.
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "23 4 * * 1"
+
+jobs:
+  analyze:
+    name: Analyze JavaScript
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          build-mode: none
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"

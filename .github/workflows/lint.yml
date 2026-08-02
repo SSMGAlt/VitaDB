@@ -1,0 +1,42 @@
+name: Lint
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  php-lint:
+    name: PHP syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: Lint every .php file
+        run: |
+          status=0
+          while IFS= read -r -d '' file; do
+            php -l "$file" || status=1
+          done < <(find . -type d \( -name node_modules -o -name spyc-master \) -prune -o -type f -name '*.php' -print0)
+          exit $status
+
+  js-lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install ESLint
+        run: npm install --no-save eslint@8
+
+      - name: Run ESLint
+        run: npx eslint --no-eslintrc -c .eslintrc.json "**/*.js" --ignore-pattern node_modules --ignore-pattern js/dependencies --ignore-pattern templates/lumino --ignore-pattern spyc-master

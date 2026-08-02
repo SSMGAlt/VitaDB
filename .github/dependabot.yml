@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # This repo vendors its JS dependencies directly under node_modules/ and
+  # js/dependencies/ rather than through a package.json, so there's no
+  # npm/composer manifest for Dependabot to track yet. This keeps the
+  # GitHub Actions workflows themselves (lint.yml, codeql.yml) up to date.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
