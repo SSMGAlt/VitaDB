@@ -12,14 +12,20 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>VitaDB by Vita Nuova</title>
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<title>VitaDB</title>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<style>
+			body, .navbar, .panel, .breadcrumb, .btn, h1, h2, h3, h4, h5, h6, input, select, textarea {
+				font-family: 'Roboto', sans-serif;
+				font-weight: 300;
+			}
+		</style>
 		<link href="templates/lumino/css/bootstrap.min.css" rel="stylesheet">
 		<link href="templates/lumino/css/datepicker3.css" rel="stylesheet">
 		<link href="js/dependencies/alertify.js-master/dist/css/alertify.css" rel="stylesheet" id="alertifyCSS">
 		<link href="css/font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="js/dependencies/tooltipster-master/dist/css/tooltipster.bundle.min.css" />
-		<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>

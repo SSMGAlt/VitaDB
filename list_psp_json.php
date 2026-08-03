@@ -9,7 +9,7 @@
 		die("Connection failed: " . mysqli_connect_error());
 	} 
 	
-	$sth = mysqli_query($con,"SELECT * FROM vitadb WHERE type = 10 ORDER BY date DESC");
+	$sth = mysqli_query($con,"SELECT * FROM vitadb WHERE type >= 10 AND type <= 13 ORDER BY date DESC");
 	if ($sth){
 		$rows = array();
 		while($r = mysqli_fetch_assoc($sth)) {

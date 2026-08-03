@@ -22,7 +22,7 @@ app.controller('registerController',function($rootScope, $scope, $http, $locatio
 		}
 		
 		// Registration request to the server
-		$http.post('register.php', data).then(res => {
+		$http.post('register.php', data).then(() => {
 			
 			// Login request to the server
 			$http.post('login.php', data).then(res => {

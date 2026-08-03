@@ -1,6 +1,6 @@
 var app = angular.module('VitaDB', ['ngRoute', 'ngAnimate', 'angular-marquee', 'angularCSS', 'angular.filter'])
 
-app.run(function ($http, $rootScope, $location){
+app.run(function ($http, $rootScope){
 	if (localStorage.getItem('id') && localStorage.getItem('token')) {
 		$rootScope.user = {}
 		$rootScope.user.email = localStorage.getItem('id');

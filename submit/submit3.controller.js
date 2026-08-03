@@ -1,4 +1,4 @@
-app.controller('submit3Controller',function($scope, $rootScope, $http, $location, $css){
+app.controller('submit3Controller',function($scope, $rootScope, $http, $location, $css, $interval){
 	
 	$css.removeAll();
 	$css.add([
@@ -16,15 +16,20 @@ app.controller('submit3Controller',function($scope, $rootScope, $http, $location
 	
 	// submit function
 	$scope.submit = function () {
-		$http.post('submit3.php', $scope.conf).then(res => {
+		$http.post('submit3.php', $scope.conf).then(() => {
 			alertify.success($scope.conf.name + " added successfully!");
 			$location.path('/tools')
 		})
 	}
 	
 	// Watch for changes caused by the iframe
-	setInterval(function(){
+	var theInterval = $interval(function(){
 		if ($scope.conf.sshot != document.getElementById('sshot').value) $scope.conf.sshot = document.getElementById('sshot').value
 	}, 500)
-
+	
+	// Stop polling once the user navigates away - otherwise this keeps firing
+	// forever against form elements that no longer exist on the page
+	$scope.$on('$destroy', function(){
+		$interval.cancel(theInterval)
+	})
 })

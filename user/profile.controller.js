@@ -23,14 +23,14 @@ app.controller('profileController',function ($scope, $rootScope, $http, $locatio
 		if (res.data[0].hidden_mail == 1) $scope.conf.email = $rootScope.user.email // Populating mail with rootScope cause API will hide email
 		if (res.data[0].avatar == null){
 			$scope.conf = {
-				avatar: "unknown.jpg",
+				avatar: "unknown.png",
 				role: "Guest",
 				name: $rootScope.user.name,
 				color: "black"
 			}
 		}else{
 			if (res.data[0].avatar.length < 4){
-				$scope.conf.avatar = "unknown.jpg"
+				$scope.conf.avatar = "unknown.png"
 			}
 			if (res.data[0].roles[0] == "1"){
 				$scope.conf.role = "Founder"
@@ -65,7 +65,7 @@ app.controller('profileController',function ($scope, $rootScope, $http, $locatio
 			localStorage.setItem('theme', $rootScope.theme)
 		}
 		
-		$http.post('user_update.php', $scope.conf).then(function(res){
+		$http.post('user_update.php', $scope.conf).then(function(){
 			alertify.success("Profile updated successfully!");
 			$location.path('/user/' + $scope.conf.name)
 		})
@@ -83,4 +83,9 @@ app.controller('profileController',function ($scope, $rootScope, $http, $locatio
 		}
 	}.bind(this), 500);
 	
+	// Stop polling once the user navigates away - otherwise this keeps firing
+	// forever against form elements that no longer exist on the page
+	$scope.$on('$destroy', function(){
+		$interval.cancel(theInterval)
+	})
 })

@@ -58,7 +58,7 @@
 							<h4>Avatar:</h4>
 						</div>
 						<div class="form-group">
-							<center><img class="icon" ng-src="avatars/{{conf.avatar}}" style="max-width: 50%;" /></center>
+							<center><img class="icon" ng-src="avatars/{{conf.avatar || 'unknown.png'}}" style="max-width: 50%;" /></center>
 						</div>
 						<div class="form-group">
 							<h5>&nbsp;Avatar must be a 240x240 JPG/PNG image.</h5>

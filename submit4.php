@@ -36,7 +36,8 @@
 	$url3 = $request->data;
 	$url4 = addslashes($request->data);
 	if ($url3 != $url4) die("Invalid data url");
-	$type = 10; // PSP Homebrew - own top-level category, no genre subselection
+	$type = intval($request->type);
+	if ($type < 10 || $type > 13) die("Invalid PSP homebrew genre");
 	$day = $request->date;
 	$day2 = addslashes($request->date);
 	if ($day != $day2) die("Invalid date");

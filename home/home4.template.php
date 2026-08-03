@@ -12,15 +12,35 @@
 			</div>
 		</ol>
 	</div>
+		<ol class="breadcrumb-alert">
+			<b>Note:</b> You can now download homebrews from VitaDB directly from your PSVITA by using <a href="https://www.rinnegatamante.eu/vitadb/#/info/877">VitaDB Downloader</a>.
+		</ol>
 	<br>
 	<div class="row">
 		<div class="col-md-4">
 			<input style="display:inline-block;vertical-align:middle;" type="text" ng-model="field" class="form-control" placeholder="Search..." required="true" />
 		</div>
+		<div class="col-md-4">
+			<select style="display:inline-block;vertical-align:middle;" ng-change="changeView()" ng-model="cat_filter" required="true" class="form-control">
+				<option value=0>All Categories</option>
+				<option value=10>Original Games</option>
+				<option value=11>Game Ports</option>
+				<option value=12>Utilities</option>
+				<option value=13>Emulators</option>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<select style="display:inline-block;vertical-align:middle;" ng-model="sort_by" required="true" class="form-control">
+				<option value="-date">Most Recent</option>
+				<option value="date">Oldest</option>
+				<option value="-downloads">Most Downloaded</option>
+				<option value="downloads">Least Downloaded</option>
+			</select>
+		</div>
 	</div>
 	<br>
 	<div class="row" id="hb-list">
-		<div ng-repeat="brew in brews | filter: filterBrews(field)" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+		<div ng-repeat="brew in brews | filter: filterBrews(field) | orderBy: sort_by" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 			<div class="panel panel-widget ">
 				<div class="row no-padding">
 					<div class="col-md-3">
@@ -36,7 +56,7 @@
 						&nbsp;
 						<a ng-if="user && user.role < 5" href="#/edit/{{brew.id}}"><i class="fas fa-edit" aria-hidden="true"></i> Edit</a>
 					</div>
-					<div class="topcorner"><h6 style="text-align: right;">{{brew.date}} &nbsp;<br>{{brew.downloads}} DLs&nbsp;</h6></div>
+					<div class="topcorner"><h6 style="text-align: right;">{{brew.genre}} &nbsp;<br>{{brew.date}} &nbsp;<br>{{brew.downloads}} DLs&nbsp;</h6></div>
 				</div>
 			</div>
 		</div>

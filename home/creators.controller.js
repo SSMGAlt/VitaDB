@@ -8,9 +8,14 @@ app.controller('creatorsController',function($scope, $rootScope, $http, $css){
 	]);
 	
 	$scope.creators = []
+	$scope.updates = []
 	
 	$http.post('get_top_developers.php').then(function(res){
 		$scope.creators = res.data
+	})
+	
+	$http.post('get_last_updates.php').then(function(res){
+		$scope.updates = res.data
 	})
 	
 })

@@ -35,6 +35,15 @@ RUN mkdir -p \
       /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars \
     && chown -R www-data:www-data /customers
 
+# Universal "no avatar" placeholder. Every avatar-showing template falls back
+# to this filename when a user/developer has no avatar set. It lives here
+# (not as a git-tracked /avatars/ folder in the repo) specifically so it
+# doesn't shadow the symlink below - Docker seeds a fresh named volume from
+# whatever's already at this path in the image, so it's present from the
+# very first container start, right alongside real uploaded avatars.
+COPY unknown.png /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars/unknown.png
+RUN chown www-data:www-data /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars/unknown.png
+
 # The templates reference uploads via relative web paths (icons/..., 
 # avatars/..., screenshots/...) rather than the absolute upload path above.
 # /var/www/html is bind-mounted at runtime (see docker-compose.yml), which

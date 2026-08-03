@@ -20,14 +20,14 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 		}
 		if (res.data[0].avatar == null){
 			$scope.conf = {
-				avatar: "unknown.jpg",
+				avatar: "unknown.png",
 				role: "Guest",
 				name: $routeParams.uname,
 				color: "black"
 			}
 		}else{
 			if (res.data[0].avatar.length < 4){
-				$scope.conf.avatar = "unknown.jpg"
+				$scope.conf.avatar = "unknown.png"
 			}
 			if (res.data[0].roles[0] == "1"){
 				$scope.conf.role = "Founder"
@@ -57,9 +57,6 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 		$scope.conf.tools = []
 		$scope.conf.psp = []
 		var hbs_idx = 0
-		var plugins_idx = 0
-		var tools_idx = 0
-		var psp_idx = 0
 		$http.post('get_user_hb_json.php', data).then(function(res2){
 			for (var i=0;i<res2.data.length;i++){
 				switch (Number(res2.data[i].type)){
@@ -95,15 +92,15 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 						break;
 					case 9:
 						$scope.conf.tools.push(res2.data[i])
-						tools_idx++
 						break;
 					case 10:
+					case 11:
+					case 12:
+					case 13:
 						$scope.conf.psp.push(res2.data[i])
-						psp_idx++
 						break;
 					default:
 						$scope.conf.plugins.push(res2.data[i])
-						plugins_idx++
 						break;
 				}			
 			}

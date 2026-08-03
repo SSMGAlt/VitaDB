@@ -79,7 +79,7 @@ app.controller('infoController',function ($scope, $rootScope, $http, $routeParam
 		scope: {
 			images: '='
 		},
-		link: function(scope, element, attributes){
+		link: function(scope){
 			scope.nowShowing = 0;
 			$interval(function showNext(){
 				if(scope.nowShowing != scope.images.length - 1){

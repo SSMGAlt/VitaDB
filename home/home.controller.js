@@ -9,6 +9,7 @@ app.controller('homeController',function ($scope, $rootScope, $http, $routeParam
 	
 	$scope.field = ''
 	$scope.cat_filter = "0"
+	$scope.sort_by = "-date"
 	$scope.updates = []
 	$scope.views = []
 	$scope.views.push([])
@@ -35,6 +36,12 @@ app.controller('homeController',function ($scope, $rootScope, $http, $routeParam
 					break;
 				case 5:
 					$scope.brews[i].genre = "Emulator"
+					break;
+				case 3:
+					$scope.brews[i].genre = "Interpreter"
+					break;
+				case 7:
+					$scope.brews[i].genre = "Engine"
 					break;
 				default:
 					$scope.brews[i].genre = "Unknown"

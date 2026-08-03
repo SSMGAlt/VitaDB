@@ -11,13 +11,21 @@
   },
   "globals": {
     "angular": "readonly",
-    "alertify": "readonly",
-    "app": "writable"
+    "alertify": "readonly"
   },
   "extends": "eslint:recommended",
   "rules": {
     "no-unused-vars": "warn",
     "no-empty": "warn",
     "no-console": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "excludedFiles": "app.js",
+      "globals": {
+        "app": "writable"
+      }
+    }
+  ]
 }

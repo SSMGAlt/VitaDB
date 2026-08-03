@@ -12,6 +12,9 @@
 			</div>
 		</ol>
 	</div>
+		<ol class="breadcrumb-alert">
+			<b>Note:</b> You can now download homebrews from VitaDB directly from your PSVITA by using <a href="https://www.rinnegatamante.eu/vitadb/#/info/877">VitaDB Downloader</a>.
+		</ol>
 	<br>
 	<div class="row">
 		<div class="col-md-4">
@@ -22,14 +25,24 @@
 				<option value=0>All Categories</option>
 				<option value=1>Original Games</option>
 				<option value=2>Game Ports</option>
+				<option value=3>Interpreters</option>
 				<option value=4>Utilities</option>
 				<option value=5>Emulators</option>
+				<option value=7>Engines</option>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<select style="display:inline-block;vertical-align:middle;" ng-model="sort_by" required="true" class="form-control">
+				<option value="-date">Most Recent</option>
+				<option value="date">Oldest</option>
+				<option value="-downloads">Most Downloaded</option>
+				<option value="downloads">Least Downloaded</option>
 			</select>
 		</div>
 	</div>
 	<br>
 	<div class="row" id="hb-list">
-		<div ng-repeat="brew in brews | filter: filterBrews(field)" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+		<div ng-repeat="brew in brews | filter: filterBrews(field) | orderBy: sort_by" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 			<div class="panel panel-widget ">
 				<div class="row no-padding">
 					<div class="col-md-4">

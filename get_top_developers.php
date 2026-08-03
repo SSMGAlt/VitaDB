@@ -33,7 +33,17 @@
 		
 		$rows = array();
 		foreach ($counts as $name => $count) {
-			$rows[] = array('name' => $name, 'ports' => $count);
+			$avatar = "";
+			$sth2 = mysqli_prepare($con,"SELECT avatar FROM vitadb_users WHERE name=?");
+			mysqli_stmt_bind_param($sth2, "s", $name);
+			mysqli_stmt_execute($sth2);
+			$data = mysqli_stmt_get_result($sth2);
+			if (mysqli_num_rows($data)>0){
+				$u = mysqli_fetch_assoc($data);
+				$avatar = $u['avatar'];
+			}
+			mysqli_stmt_close($sth2);
+			$rows[] = array('name' => $name, 'ports' => $count, 'avatar' => $avatar);
 		}
 		
 		echo json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

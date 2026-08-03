@@ -20,9 +20,6 @@ app.controller('titleslistController',function ($scope, $rootScope, $http, $rout
 			$scope.brews[j].authors_info = []
 			var i = 0
 			while (i < $scope.brews[j].authors.length){
-				var t = {
-					uname : $scope.brews[j].authors[i]
-				}
 				$scope.brews[j].authors_info.push({
 					name : $scope.brews[j].authors[i],
 					paypal : "",

@@ -1,4 +1,4 @@
-app.controller('editController',function($scope, $rootScope, $http, $location, $routeParams, $css){
+app.controller('editController',function($scope, $rootScope, $http, $location, $routeParams, $interval, $css){
 	
 	$css.removeAll();
 	$css.add([
@@ -32,17 +32,17 @@ app.controller('editController',function($scope, $rootScope, $http, $location, $
 		$scope.conf.password = $rootScope.user.password
 		$scope.conf.log_author = $rootScope.user.name
 		if ($scope.conf.type < 8){
-			$http.post('update.php', $scope.conf).then(function(res){
+			$http.post('update.php', $scope.conf).then(function(){
 				alertify.success($scope.conf.name + " edited successfully!");
 				$location.path('/')
 			})
 		}else if ($scope.conf.type == 8){
-			$http.post('update2.php', $scope.conf).then(function(res){
+			$http.post('update2.php', $scope.conf).then(function(){
 				alertify.success($scope.conf.name + " edited successfully!");
 				$location.path('/plugins')
 			})
 		}else{
-			$http.post('update3.php', $scope.conf).then(function(res){
+			$http.post('update3.php', $scope.conf).then(function(){
 				alertify.success($scope.conf.name + " edited successfully!");
 				$location.path('/tools')
 			})
@@ -50,11 +50,16 @@ app.controller('editController',function($scope, $rootScope, $http, $location, $
 	}
 	
 	// Watch for changes caused by the iframe
-	setInterval(function(){
+	var theInterval = $interval(function(){
 		if ($scope.conf.sshot != document.getElementById('sshot').value) $scope.conf.sshot = document.getElementById('sshot').value
 		if ($scope.conf.titleid != document.getElementById('hb_titleid').value) $scope.conf.titleid = document.getElementById('hb_titleid').value
 		if ($scope.conf.name != document.getElementById('hb_title').value) $scope.conf.name = document.getElementById('hb_title').value
 		if ($scope.conf.icon != document.getElementById('url').value) $scope.conf.icon = document.getElementById('url').value
 	}, 500)
 
+	// Stop polling once the user navigates away - otherwise this keeps firing
+	// forever against form elements that no longer exist on the page
+	$scope.$on('$destroy', function(){
+		$interval.cancel(theInterval)
+	})
 })

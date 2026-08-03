@@ -13,7 +13,7 @@
 			<div class="panel panel-widget ">
 				<div class="row no-padding">
 					<div class="col-md-4">
-						<center><a href="#/user/{{user.name}}"><img class="icon" ng-src="avatars/{{user.avatar}}" /></a></center>
+						<center><a href="#/user/{{user.name}}"><img class="icon" ng-src="avatars/{{user.avatar || 'unknown.png'}}" /></a></center>
 					</div>
 					<div class="col-md-8">
 						<h4 style="white-space: nowrap;overflow: hidden;"><a href="#/user/{{user.name}}"><b>{{user.name}}</b></a></h3>

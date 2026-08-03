@@ -12,6 +12,9 @@
 			</div>
 		</ol>
 	</div>
+		<ol class="breadcrumb-alert">
+			<b>Note:</b> You can now download plugins from VitaDB directly from your PSVITA by using <a href="https://www.rinnegatamante.eu/vitadb/#/info/440">Easy Plugin</a> by <a href="https://www.rinnegatamante.eu/vitadb/#/user/THEN00P">THEN00P</a>.
+		</ol>
 	<br>
 	<div class="row">
 		<div class="col-md-4">

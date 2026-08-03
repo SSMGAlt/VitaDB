@@ -13,6 +13,14 @@
 							<input type="text" id="hb_title" ng-model="conf.name" class="form-control" placeholder="Homebrew Name" required="true" />
 						</div>
 						<div class="form-group">
+							<select ng-model="conf.type" required="true" class="form-control">
+								<option value=10>Original Game</option>
+								<option value=11>Game Port</option>
+								<option value=12>Utility</option>
+								<option value=13>Emulator</option>
+							</select>
+						</div>
+						<div class="form-group">
 							<input type="text" ng-model="conf.version" class="form-control" placeholder="Homebrew Version" required="true" />
 						</div>
 						<div class="form-group">
