@@ -36,18 +36,18 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
 		<script src="templates/lumino/js/lumino.glyphs.js"></script>
-		<script src="js/dependencies/alertify.js-master/dist/js/alertify.js"></script>
 		<script src="js/dependencies/angular-marquee.js"></script>
 		<script src="app.js"></script>
 		<script src="home/home.controller.js"></script>
 		<script src="home/home2.controller.js"></script>
 		<script src="home/home3.controller.js"></script>
+		<script src="home/home4.controller.js"></script>
 		<script src="home/api.controller.js"></script>
 		<script src="home/titleslist.controller.js"></script>
 		<script src="home/info.controller.js"></script>
 		<script src="home/staff.controller.js"></script>
 		<script src="home/supporters.controller.js"></script>
-		<script src="home/bounties.controller.js"></script>
+		<script src="home/creators.controller.js"></script>
 		<script src="login/login.controller.js"></script>
 		<script src="login/logout.controller.js"></script>
 		<script src="login/register.controller.js"></script>
@@ -60,6 +60,7 @@
 		<script src="user/profile.controller.js"></script>
 	</head>
 	<body>
+		<script src="js/dependencies/alertify.js-master/dist/js/alertify.js"></script>
 		<input type='hidden' name='_csrf' value='<%= _csrf %>'>
 		<nav class="navbar navbar-inverse navbar-fixed-top navbar-login" role="navigation">
 			<div class="container-fluid">
@@ -126,6 +127,12 @@
 					</a>
 				</li>
 				<li>
+					<a href="#/psp">
+						<i class="fa fa-gamepad" aria-hidden="true"></i> &nbsp;
+						PSP Homebrews
+					</a>
+				</li>
+				<li>
 					<a href="#/tools">
 						<i class="fa fa-laptop" aria-hidden="true"></i> &nbsp;
 						PC Tools
@@ -133,9 +140,9 @@
 				</li>
 				<li role="presentation" class="divider"></li>
 				<li>
-					<a href="#/bounties">
-						<i class="fa fa-credit-card" aria-hidden="true"></i> &nbsp;
-						Bounties Tracker
+					<a href="https://zealouschuck.com/ps-vita-bounty" target="_blank" rel="noopener">
+						<i class="fa fa-trophy" aria-hidden="true"></i> &nbsp;
+						Bounties (External)
 					</a>
 				</li>
 				<li>
@@ -155,6 +162,12 @@
 					<a href="#/api">
 						<i class="fa fa-desktop" aria-hidden="true"></i> &nbsp;
 						Developer Api
+					</a>
+				</li>
+				<li>
+					<a href="#/creators">
+						<i class="fa fa-code" aria-hidden="true"></i> &nbsp;
+						Top 50 Developers
 					</a>
 				</li>
 				<li>
@@ -191,7 +204,7 @@
 				<li ng-if="user  && user.role < 3">
 					<a href="#/submit4">
 						<i class="fa fa-plus" aria-hidden="true"></i> &nbsp;
-						Submit a new bounty
+						Submit a new PSP homebrew
 					</a>
 				</li>
 				<li ng-if="user">

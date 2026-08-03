@@ -42,16 +42,7 @@ app.controller('infoController',function ($scope, $rootScope, $http, $routeParam
 		} else {
 			$scope.conf.multimedia_tab = 1
 		}
-		names = []
 		var i = 0
-		while (i < $scope.conf.authors.length){
-			var t = {
-				uname: $scope.conf.authors[i]
-			}
-			names.push(t)
-			i++
-		}
-		i = 0
 		while (i < $scope.conf.authors.length){
 			var t = {
 				uname : $scope.conf.authors[i]

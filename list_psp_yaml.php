@@ -1,5 +1,5 @@
 <?php
-
+	
 	// Requiring Spyc YAML Parser
 	require_once "spyc-master/Spyc.php";
 
@@ -11,12 +11,11 @@
 	if (mysqli_connect_errno()){
 		die("Connection failed: " . mysqli_connect_error());
 	} 
-
-	$sth = mysqli_query($con,"SELECT * FROM vitadb WHERE type < 8 ORDER BY id DESC");
+	
+	$sth = mysqli_query($con,"SELECT * FROM vitadb WHERE type = 10 ORDER BY id DESC");
 	if ($sth){
 		$rows = array();
 		while($r = mysqli_fetch_assoc($sth)) {
-			if (strlen($r['data']) == 0){ unset($r['data']); }
 			if (strlen($r['screenshots']) == 0){ unset($r['screenshots']); }else{
 				$screenshots = explode(";",$r['screenshots']);
 				unset($r['screenshots']);
@@ -29,19 +28,9 @@
 			unset($r['url']);
 			$r['url'] = $masked_link;
 			
-			// Redirect patch for when bintray is off
-			$data = $r['data'];
-			$data = str_replace("https://bintray.com/vitadb/VitaDB/download_file?file_path=",
-				"https://dl.coolatoms.org/vitadb/",
-				$data);
-			$data = str_replace("%2F", "/", $data);
-			$data = str_replace("+", " ", $data);
-			unset($r['data']);
-			$r['data'] = $data;
-			
 			$rows[] = $r;
 		}
-		echo Spyc::YAMLDump($rows,4,0);
+		echo Spyc::YAMLDump($rows,4,60);
 	} else {
 		echo("An error occurred: " . mysqli_error($con));
 	}

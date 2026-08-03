@@ -24,7 +24,7 @@
 	while($r = mysqli_fetch_assoc($data)) {
 				
 		// Downloads counter support
-		$masked_link = "https://vitadb.rinnegatamante.it/get_hb_link.php?id=" . $r['id'];
+		$masked_link = "get_hb_link.php?id=" . $r['id'];
 		$r['url'] = $masked_link;
 		
 		// Redirect patch for when bintray is off

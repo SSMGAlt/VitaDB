@@ -10,7 +10,7 @@ app.controller('staffController',function($scope, $rootScope, $http, $routeParam
 	$scope.staff = {}
 	$http.post('get_staff.php').then(function(res){
 		$scope.staff = res.data
-		i = 0
+		var i = 0
 		while (i < res.data.length){
 			if (res.data[i].hidden_mail == 1){
 				$scope.staff[i].email = ""

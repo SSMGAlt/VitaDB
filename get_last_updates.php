@@ -7,6 +7,7 @@
 		die("Connection failed: " . mysqli_connect_error());
 	} 
 	$sth = mysqli_query($con,"SELECT * FROM vitadb_log ORDER BY id DESC LIMIT 5");
+	$rows = array();
 	while($r = mysqli_fetch_assoc($sth)) {
 		$rows[] = $r;	
 	}

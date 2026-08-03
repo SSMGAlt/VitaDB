@@ -1,4 +1,4 @@
-app.controller('home2Controller',function($scope, $rootScope, $http, $routeParams, $location, $anchorScroll, $css){
+app.controller('home4Controller',function($scope, $rootScope, $http, $routeParams, $location, $anchorScroll, $css){
 	
 	$css.removeAll();
 	$css.add([
@@ -9,7 +9,7 @@ app.controller('home2Controller',function($scope, $rootScope, $http, $routeParam
 	
 	$scope.field = ''
 
-	$http.post('list_plugins_json.php').then(function(res){
+	$http.post('list_psp_json.php').then(function(res){
 		$scope.brews = res.data
 		for (var i=0;i<res.data.length;i++){
 			$scope.brews[i].authors = $scope.brews[i].author.split(" & ")

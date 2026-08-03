@@ -97,17 +97,4 @@ CREATE TABLE IF NOT EXISTS `vitadb_ips` (
   UNIQUE KEY `uq_vitadb_ips_ip` (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Bountysource-linked bounties. `description`/`paid_out` are read by
--- list_bounties.php but never written by any endpoint in this codebase -
--- they default here and presumably were maintained by hand/admin tooling
--- upstream.
-CREATE TABLE IF NOT EXISTS `vitadb_bounties` (
-  `id`           INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `bid`          VARCHAR(64)  NOT NULL,
-  `project`      VARCHAR(255) NOT NULL,
-  `description`  TEXT,
-  `paid_out`     TINYINT(1)   NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 SET FOREIGN_KEY_CHECKS = 1;

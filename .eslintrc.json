@@ -11,7 +11,8 @@
   },
   "globals": {
     "angular": "readonly",
-    "alertify": "readonly"
+    "alertify": "readonly",
+    "app": "writable"
   },
   "extends": "eslint:recommended",
   "rules": {

@@ -18,16 +18,7 @@ app.controller('titleslistController',function ($scope, $rootScope, $http, $rout
 		while (j < $scope.brews.length){
 			$scope.brews[j].authors = $scope.brews[j].author.split(" & ")
 			$scope.brews[j].authors_info = []
-			names = []
 			var i = 0
-			while (i < $scope.brews[j].authors.length){
-				var t = {
-					uname: $scope.brews[j].authors[i]
-				}
-				names.push(t)
-				i++
-			}
-			i = 0
 			while (i < $scope.brews[j].authors.length){
 				var t = {
 					uname : $scope.brews[j].authors[i]

@@ -35,4 +35,15 @@ RUN mkdir -p \
       /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars \
     && chown -R www-data:www-data /customers
 
+# The templates reference uploads via relative web paths (icons/..., 
+# avatars/..., screenshots/...) rather than the absolute upload path above.
+# /var/www/html is bind-mounted at runtime (see docker-compose.yml), which
+# would wipe out anything placed there at build time - so these symlinks are
+# created by the entrypoint script below, every time the container starts,
+# instead of here in the Dockerfile.
+COPY docker-entrypoint.sh /usr/local/bin/vitadb-entrypoint.sh
+RUN chmod +x /usr/local/bin/vitadb-entrypoint.sh
+ENTRYPOINT ["vitadb-entrypoint.sh"]
+CMD ["apache2-foreground"]
+
 WORKDIR /var/www/html

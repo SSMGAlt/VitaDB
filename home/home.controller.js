@@ -21,7 +21,7 @@ app.controller('homeController',function ($scope, $rootScope, $http, $routeParam
 	$scope.views.push([])
 	$http.post('list_hbs_json.php').then(function(res){
 		$scope.brews = res.data
-		for (i=0;i<res.data.length;i++){
+		for (var i=0;i<res.data.length;i++){
 			$scope.brews[i].authors = $scope.brews[i].author.split(" & ")
 			switch (Number(res.data[i].type)){
 				case 1:

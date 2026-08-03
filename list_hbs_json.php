@@ -15,7 +15,7 @@
 		while($r = mysqli_fetch_assoc($sth)) {
 			
 			// Downloads counter support
-			$masked_link = "https://vitadb.rinnegatamante.it/get_hb_link.php?id=" . $r['id'];
+			$masked_link = "get_hb_link.php?id=" . $r['id'];
 			unset($r['url']);
 			$r['url'] = $masked_link;
 			

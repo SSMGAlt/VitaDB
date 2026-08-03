@@ -8,7 +8,8 @@
 					<a href="#/" ng-if="conf.type < 8"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> &nbsp;
 					<a href="#/plugins" ng-if="conf.type == 8"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> &nbsp;
 					<a href="#/tools" ng-if="conf.type == 9"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> &nbsp;
-					<img class="icon" ng-if="conf.type < 8" src="https://rinnegatamante.it/vitadb/icons/{{conf.icon}}" style="height: 100%;" /> {{conf.name}} {{conf.version}}
+					<a href="#/psp" ng-if="conf.type == 10"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> &nbsp;
+					<img class="icon" ng-if="conf.type < 8 || conf.type == 10" ng-src="icons/{{conf.icon}}" style="height: 100%;" /> {{conf.name}} {{conf.version}}
 				</div>
 				<div class="panel-body">
 					<fieldset>
@@ -21,6 +22,7 @@
 							<span ng-if="conf.type < 8" style="white-space: pre-line;">VPK Size: {{conf.size}}<br></span>
 							<span ng-if="conf.type == 8" style="white-space: pre-line;">Plugin Size: {{conf.size}}</span>
 							<span ng-if="conf.type == 9" style="white-space: pre-line;">Tool Size: {{conf.size}}</span>
+							<span ng-if="conf.type == 10" style="white-space: pre-line;">Homebrew Size: {{conf.size}}<br></span>
 							<span ng-if="conf.data.length > 0" style="white-space: pre-line;">Data Files Size: {{conf.data_size}}</span>
 						</div>
 						<div class="form-group">
@@ -106,6 +108,7 @@
 						<a href="{{conf.url}}" ng-if="conf.type < 8"><input type="submit" value="Download VPK" class="btn btn-primary" /></a>
 						<a href="{{conf.url}}" ng-if="conf.type == 8"><input type="submit" value="Download Plugin" class="btn btn-primary" /></a>
 						<a href="{{conf.url}}" ng-if="conf.type == 9"><input type="submit" value="Download Tool" class="btn btn-primary" /></a>
+						<a href="{{conf.url}}" ng-if="conf.type == 10"><input type="submit" value="Download Homebrew" class="btn btn-primary" /></a>
 						<a href="{{conf.data}}" ng-if="conf.data.length > 0"><input type="submit" value="Download Data Files" class="btn btn-primary" /></a>
 						<a href="" data-toggle="modal" data-target="#vpkQR" ng-if="conf.type < 8"><input type="submit" value="Get QR Code (VPK)" class="btn btn-primary" /></a>
 						<a href="" data-toggle="modal" data-target="#pluginQR" ng-if="conf.type == 8"><input type="submit" value="Get QR Code" class="btn btn-primary" /></a>
@@ -124,7 +127,7 @@
 					<h4 class="modal-title">Download {{conf.name}}</h4>
 				</div>
 				<div class="modal-body">
-					<center><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.url}}"></img></center>
+					<center><img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.url}}"></img></center>
 					<h4>Instructions:</h4>
 					<ul>
 						<li>Start <b>VitaShell</b> on your PSVITA device.</li>
@@ -143,7 +146,7 @@
 					<h4 class="modal-title">Download {{conf.name}}</h4>
 				</div>
 				<div class="modal-body">
-					<center><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.url}}"></img></center>
+					<center><img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.url}}"></img></center>
 					<h4>Instructions:</h4>
 					<ul>
 						<li>Start <b>VitaShell</b> on your PSVITA device.</li>
@@ -162,7 +165,7 @@
 					<h4 class="modal-title">Download {{conf.name}} data files</h4>
 				</div>
 				<div class="modal-body">
-					<center><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.data}}"></img></center>
+					<center><img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{conf.data}}"></img></center>
 					<h4>Instructions:</h4>
 					<ul>
 						<li>Start <b>VitaShell</b> on your PSVITA device.</li>

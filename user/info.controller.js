@@ -55,11 +55,13 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 		$scope.conf.hbs = []
 		$scope.conf.plugins = []
 		$scope.conf.tools = []
+		$scope.conf.psp = []
 		var hbs_idx = 0
 		var plugins_idx = 0
 		var tools_idx = 0
+		var psp_idx = 0
 		$http.post('get_user_hb_json.php', data).then(function(res2){
-			for (i=0;i<res2.data.length;i++){
+			for (var i=0;i<res2.data.length;i++){
 				switch (Number(res2.data[i].type)){
 					case 1:
 						$scope.conf.hbs.push(res2.data[i])
@@ -94,6 +96,10 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 					case 9:
 						$scope.conf.tools.push(res2.data[i])
 						tools_idx++
+						break;
+					case 10:
+						$scope.conf.psp.push(res2.data[i])
+						psp_idx++
 						break;
 					default:
 						$scope.conf.plugins.push(res2.data[i])

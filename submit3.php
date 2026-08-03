@@ -1,5 +1,11 @@
 <?php
 	
+	// Builds an absolute URL to this deployment - avoids hardcoding any one domain
+	function current_site_url() {
+		$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+		return $scheme . "://" . $_SERVER['HTTP_HOST'];
+	}
+
 	// Getting POST data, performing some security checks
 	$postdata = file_get_contents("php://input");
 	$request = json_decode($postdata);
@@ -136,21 +142,21 @@
 				$screenshots = explode(';', $sshot);
 				$cb->setRemoteDownloadTimeout(10000);
 				foreach ($screenshots as $screenshot) {
-					$sshot_url = "https://vitadb.rinnegatamante.it/" . $screenshot;
+					$sshot_url = current_site_url() . "/" . $screenshot;
 					$reply = $cb->media_upload(array(
 						'media' => $sshot_url
 					));
 					$media_ids[] = $reply->media_id_string;
 				}
 				$media_ids = implode(',', $media_ids);
-				$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: https://vitadb.rinnegatamante.it/#/info/$hb_id";
+				$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: " . current_site_url() . "/#/info/$hb_id";
 				$reply = $cb->statuses_update([
 					'status' => $tweet_text,
 					'media_ids' => $media_ids
 				]);
 				print_r($reply);
 			} else {
-				$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: https://vitadb.rinnegatamante.it/#/info/$hb_id";
+				$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: " . current_site_url() . "/#/info/$hb_id";
 				$reply = $cb->statuses_update([
 					'status' => $tweet_text
 				]);

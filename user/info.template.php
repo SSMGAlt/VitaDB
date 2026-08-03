@@ -6,12 +6,12 @@
 			<div class="panel panel-widget ">
 				<div class="row no-padding">
 					<div class="col-md-4">
-						<center><img class="icon" src="https://rinnegatamante.it/vitadb/avatars/{{conf.avatar}}" style="max-width: 50%;" /></center> 
+						<center><img class="icon" ng-src="avatars/{{conf.avatar}}" style="max-width: 50%;" /></center> 
 					</div>
 					<div class="col-md-8">
 						<h4 style="white-space: nowrap;overflow: hidden;"><b>{{conf.name}}</b></h3>
 						<h6><a href="mailto:{{conf.email}}">{{conf.email}}</a></h6>
-						<div class="roleplate" style="background-color: {{conf.color}}">{{conf.role}}</div>
+						<div class="roleplate" ng-style="{'background-color': conf.color}">{{conf.role}}</div>
 						<h3>
 							<span ng-if="conf.website.length > 0"><a href="{{conf.website}}"><i class="fa fa-globe" aria-hidden="true"></i></a></span>
 							<span ng-if="conf.twitter.length > 0"><a href="https://twitter.com/{{conf.twitter}}"><i class="fab fa-twitter" aria-hidden="true"></i></a></span>
@@ -39,7 +39,7 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat="brew in conf.hbs">
-									<td><a href="#/info/{{brew.id}}"><img class="icon" src="https://rinnegatamante.it/vitadb/icons/{{brew.icon}}" style="max-width: 64px;" /></a></td>
+									<td><a href="#/info/{{brew.id}}"><img class="icon" ng-src="icons/{{brew.icon}}" style="max-width: 64px;" /></a></td>
 									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
 									<td>{{brew.date}}</td>
 									<td>
@@ -94,6 +94,30 @@
 									<td>{{brew.date}}</td>
 									<td>
 										<a href="{{brew.url}}"><input type="submit" value="Download Tool" class="btn btn-primary" /></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<center><h4>PSP Homebrews made by this user:</h4></center>
+				<br>
+				<div class="row no-padding">
+					<div class="fixed-table-container">
+						<table data-toggle="table" class="table table-hover">
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Last Update</th>
+									<th>Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="brew in conf.psp">
+									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
+									<td>{{brew.date}}</td>
+									<td>
+										<a href="{{brew.url}}"><input type="submit" value="Download Homebrew" class="btn btn-primary" /></a>
 									</td>
 								</tr>
 							</tbody>

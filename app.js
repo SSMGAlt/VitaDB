@@ -13,19 +13,20 @@ app.run(function ($http, $rootScope, $location){
 	}
 })
 
-app.factory('HttpInterceptorMessage', ['$q', '$location', '$rootScope', function ($q, $location, $rootScope) {
+app.factory('HttpInterceptorMessage', ['$q', '$rootScope', function ($q, $rootScope) {
 	return {
 		
 		// optional method
 		'request': function (config) {
 			
 			// do something on success
+			var id, token
 			if ($rootScope.user) {
-				var id = $rootScope.user.id
-				var token = $rootScope.user.password
+				id = $rootScope.user.id
+				token = $rootScope.user.password
 			} else {
-				var id = localStorage.getItem('id')
-				var token = localStorage.getItem('token')
+				id = localStorage.getItem('id')
+				token = localStorage.getItem('token')
 			}
 			if (token && id) {
 				config.headers['www-authenticate'] = window.btoa(id + ' ' + token)
@@ -37,7 +38,7 @@ app.factory('HttpInterceptorMessage', ['$q', '$location', '$rootScope', function
 			// do something on success
 			if (response.data.message) {
 				alertify.success(response.data.message)
-			};
+			}
 			return response
 		},
 
@@ -93,6 +94,10 @@ app.config(['$locationProvider', '$routeProvider', '$httpProvider',
 			templateUrl: 'home/home3.template.php',
 			reloadOnSearch: false
 		})
+		.when('/psp', {
+			templateUrl: 'home/home4.template.php',
+			reloadOnSearch: false
+		})
 		.when('/api', {
 			templateUrl: 'home/api.template.php'
 		})
@@ -108,6 +113,9 @@ app.config(['$locationProvider', '$routeProvider', '$httpProvider',
 		.when('/supporters', {
 			templateUrl: 'home/supporters.template.php'
 		})
+		.when('/creators', {
+			templateUrl: 'home/creators.template.php'
+		})
 		.when('/user/:uname', {
 			templateUrl: 'user/info.template.php'
 		})
@@ -116,9 +124,6 @@ app.config(['$locationProvider', '$routeProvider', '$httpProvider',
 		})
 		.when('/titleids', {
 			templateUrl: 'home/titleslist.template.php'
-		})
-		.when('/bounties', {
-			templateUrl: 'home/bounties.template.php'
 		})
 		$httpProvider.interceptors.push('HttpInterceptorMessage')
 }])
