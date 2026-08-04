@@ -32,12 +32,7 @@
 			</select>
 		</div>
 		<div class="col-md-4">
-			<select style="display:inline-block;vertical-align:middle;" ng-model="sort_by" required="true" class="form-control">
-				<option value="-date">Most Recent</option>
-				<option value="date">Oldest</option>
-				<option value="-downloads">Most Downloaded</option>
-				<option value="downloads">Least Downloaded</option>
-			</select>
+			<select style="display:inline-block;vertical-align:middle;" ng-model="sort_by" ng-options="opt.value as opt.label for opt in sortOptions" required="true" class="form-control"></select>
 		</div>
 	</div>
 	<br>

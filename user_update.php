@@ -53,7 +53,7 @@
 	if (mysqli_num_rows($data)>0){
 		mysqli_stmt_close($sth);
 		$sth2 = mysqli_prepare($con,"UPDATE vitadb_users SET avatar=?,twitter=?,github=?,website=?,hidden_mail=?,paypal=?,bitcoin=?,patreon=? WHERE name=?");
-		if (strcmp($avatar, "unknown.jpg")==0){
+		if (strcmp($avatar, "unknown.png")==0){
 			$avatar = "";
 			mysqli_stmt_bind_param($sth2, "sssssssss", $avatar, $twitter, $github, $website, $hidden, $paypal, $bitcoin, $patreon, $name);
 		}else{

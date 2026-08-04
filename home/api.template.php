@@ -29,15 +29,18 @@
 						<div class="form-group">
 							<b>Get Homebrews List</b>: <br>
 							<ul>
-								<li>POST to <code>/list_hbs_<span ng-if="cat_filter == 0">json</span><span ng-if="cat_filter == 1">yaml</span>.php</code> (relative to this site)</li>
+								<li>HTTP: <a href="http://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li>HTTPS: <a href="https://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
 							</ul>
 							<b>Get Plugins List</b>: <br>
 							<ul>
-								<li>POST to <code>/list_plugins_<span ng-if="cat_filter == 0">json</span><span ng-if="cat_filter == 1">yaml</span>.php</code> (relative to this site)</li>
+								<li>HTTP: <a href="http://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li>HTTPS: <a href="https://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
 							</ul>
 							<b>Get PC Tools List</b>: <br>
 							<ul>
-								<li>POST to <code>/list_tools_<span ng-if="cat_filter == 0">json</span><span ng-if="cat_filter == 1">yaml</span>.php</code> (relative to this site)</li>
+								<li>HTTP: <a href="http://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li>HTTPS: <a href="https://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
 							</ul>
 						</div>
 					</fieldset>

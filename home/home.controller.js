@@ -9,7 +9,13 @@ app.controller('homeController',function ($scope, $rootScope, $http, $routeParam
 	
 	$scope.field = ''
 	$scope.cat_filter = "0"
-	$scope.sort_by = "-date"
+	$scope.sortOptions = [
+		{value: "-date", label: "Most Recent"},
+		{value: "date", label: "Oldest"},
+		{value: "-downloads", label: "Most Downloaded"},
+		{value: "downloads", label: "Least Downloaded"}
+	]
+	$scope.sort_by = $scope.sortOptions[0].value
 	$scope.updates = []
 	$scope.views = []
 	$scope.views.push([])

@@ -66,7 +66,7 @@
 						<input type="text" id="email" style="height:0;width:0;padding:0;border:none;" ng-model="conf.name" />
 						<input type="text" id="pass" style="height:0;width:0;padding:0;border:none;" ng-model="conf.password" />
 						<input type="text" style="height:0;width:0;padding:0;border:none;" id="url" />
-						<iframe scrolling="no" frameBorder="0" id="uploader" width="100%" height="80px" src="avatar.html" onload="document.getElementById('uploader').contentWindow.document.getElementById('email').value = document.getElementById('email').value;document.getElementById('uploader').contentWindow.document.getElementById('pass').value = document.getElementById('pass').value;document.getElementById('url').value = document.getElementById('uploader').contentWindow.document.getElementById('icon_url').innerHTML;"></iframe>
+						<iframe scrolling="no" frameBorder="0" id="uploader" width="100%" height="80px" src="avatar.html" onload="document.getElementById('uploader').contentWindow.document.getElementById('email').value = document.getElementById('email').value;document.getElementById('uploader').contentWindow.document.getElementById('pass').value = document.getElementById('pass').value;var _iconUrlEl = document.getElementById('uploader').contentWindow.document.getElementById('icon_url'); if (_iconUrlEl) document.getElementById('url').value = _iconUrlEl.innerHTML;"></iframe>
 						<div class="form-group">
 							<h4>Theme:</h4>
 						</div>

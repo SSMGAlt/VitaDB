@@ -78,7 +78,8 @@ app.controller('profileController',function ($scope, $rootScope, $http, $locatio
 			document.getElementById('url').value = ""
 			document.getElementById('uploader').src = "avatar.html"
 		}
-		if (document.getElementById('uploader').contentWindow.document.getElementById('email').value.length < 2){ // Workaround for synchronization
+		var emailField = document.getElementById('uploader').contentWindow.document.getElementById('email')
+		if (emailField && emailField.value.length < 2){ // Workaround for synchronization
 			document.getElementById('uploader').src = "avatar.html"
 		}
 	}.bind(this), 500);
