@@ -9,18 +9,27 @@ app.controller('home4Controller',function($scope, $rootScope, $http, $routeParam
 	
 	$scope.field = ''
 	$scope.cat_filter = "0"
-	$scope.sortOptions = [
-		{value: "-date", label: "Most Recent"},
-		{value: "date", label: "Oldest"},
-		{value: "-downloads", label: "Most Downloaded"},
-		{value: "downloads", label: "Least Downloaded"}
-	]
-	$scope.sort_by = $scope.sortOptions[0].value
+	$scope.sort_filter = "0"
+	$scope.sort_by = "-date"
+	$scope.changeSort = function () {
+		switch (Number($scope.sort_filter)){
+			case 1:
+				$scope.sort_by = "date"
+				break;
+			case 2:
+				$scope.sort_by = "-downloads"
+				break;
+			case 3:
+				$scope.sort_by = "downloads"
+				break;
+			default:
+				$scope.sort_by = "-date"
+				break;
+		}
+	}
 	$scope.updates = []
 	$scope.views = []
-	// PSP genres live at type 10-13 (Original Game/Game Port/Utility/Emulator),
-	// mirroring how Vita homebrews use 1/2/4/5 - kept in their own range so
-	// they don't collide with Plugins (8) or PC Tools (9)
+	// PSP genres: 10=Original Game, 11=Port, 12=Utility, 13=Emulator
 	$scope.views[10] = []
 	$scope.views[11] = []
 	$scope.views[12] = []

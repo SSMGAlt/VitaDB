@@ -11,10 +11,10 @@
 				<span ng-repeat="entry in updates track by $index"><span ng-if="$index != 0"> - </span><b>{{entry.author}}</b> {{entry.object}} <b>{{entry.hb}}</b> on <b>{{entry.date}} GMT -1:00</b>.</span>
 			</div>
 		</ol>
-	</div>
 		<ol class="breadcrumb-alert">
 			<b>Note:</b> You can now download homebrews from VitaDB directly from your PSVITA by using <a href="https://www.rinnegatamante.eu/vitadb/#/info/877">VitaDB Downloader</a>.
 		</ol>
+	</div>
 	<br>
 	<div class="row" id="hb-list">
 		<div ng-repeat="creator in creators" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">

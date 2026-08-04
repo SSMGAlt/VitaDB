@@ -84,8 +84,7 @@ app.controller('profileController',function ($scope, $rootScope, $http, $locatio
 		}
 	}.bind(this), 500);
 	
-	// Stop polling once the user navigates away - otherwise this keeps firing
-	// forever against form elements that no longer exist on the page
+	// stop polling on navigate away
 	$scope.$on('$destroy', function(){
 		$interval.cancel(theInterval)
 	})

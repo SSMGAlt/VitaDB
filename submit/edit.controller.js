@@ -57,8 +57,7 @@ app.controller('editController',function($scope, $rootScope, $http, $location, $
 		if ($scope.conf.icon != document.getElementById('url').value) $scope.conf.icon = document.getElementById('url').value
 	}, 500)
 
-	// Stop polling once the user navigates away - otherwise this keeps firing
-	// forever against form elements that no longer exist on the page
+	// stop polling on navigate away
 	$scope.$on('$destroy', function(){
 		$interval.cancel(theInterval)
 	})

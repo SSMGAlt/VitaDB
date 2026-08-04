@@ -1,10 +1,4 @@
-# VitaDB deploy image.
-#
-# The application code itself is NOT copied into this image - it's bind-mounted
-# from the git checkout at runtime (see docker-compose.yml). This image only
-# provides the PHP/Apache runtime, the one extension the app needs, and a
-# couple of hardening tweaks. Rebuilding it is cheap and doesn't require
-# touching any app files.
+# app code is bind-mounted at runtime, not baked in
 
 FROM php:8.2-apache
 
@@ -12,44 +6,25 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli \
     && a2enmod headers
 
-# PHP settings VitaDB needs: short open tags (<? ... ?>), bigger upload limits
-# for homebrew screenshots/icons than the PHP defaults allow.
+# short open tags + bigger upload limits
 COPY php-uploads.ini /usr/local/etc/php/conf.d/zz-vitadb.ini
 
-# Blocks direct browser/HTTP access to deploy/, .git/, config.php, and any
-# *.env file that might end up under the web root. PHP's own include()
-# of config.php on the server side is completely unaffected by this - it
-# only blocks requests coming in over HTTP.
+# blocks HTTP access to deploy/, .git/, config.php
 COPY apache-vitadb.conf /etc/apache2/conf-available/vitadb-security.conf
 RUN a2enconf vitadb-security
 
-# screenshots.php, icon0.php, and avatar.php write uploads to a hardcoded
-# absolute path inherited from the original author's shared hosting layout
-# (see deploy/README.md for details). Rather than edit those files, we make
-# sure this exact path exists and is owned by www-data here; docker-compose.yml
-# then mounts named volumes onto it so the first `docker compose up` populates
-# them correctly.
+# upload path (see deploy/README.md) - volumes mount onto this
 RUN mkdir -p \
       /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/screenshots \
       /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/icons \
       /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars \
     && chown -R www-data:www-data /customers
 
-# Universal "no avatar" placeholder. Every avatar-showing template falls back
-# to this filename when a user/developer has no avatar set. It lives here
-# (not as a git-tracked /avatars/ folder in the repo) specifically so it
-# doesn't shadow the symlink below - Docker seeds a fresh named volume from
-# whatever's already at this path in the image, so it's present from the
-# very first container start, right alongside real uploaded avatars.
+# default avatar placeholder, seeded into the volume
 COPY unknown.png /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars/unknown.png
 RUN chown www-data:www-data /customers/8/5/0/rinnegatamante.it/httpd.www/vitadb/avatars/unknown.png
 
-# The templates reference uploads via relative web paths (icons/..., 
-# avatars/..., screenshots/...) rather than the absolute upload path above.
-# /var/www/html is bind-mounted at runtime (see docker-compose.yml), which
-# would wipe out anything placed there at build time - so these symlinks are
-# created by the entrypoint script below, every time the container starts,
-# instead of here in the Dockerfile.
+# entrypoint creates the relative-path symlinks at container start
 COPY docker-entrypoint.sh /usr/local/bin/vitadb-entrypoint.sh
 RUN chmod +x /usr/local/bin/vitadb-entrypoint.sh
 ENTRYPOINT ["vitadb-entrypoint.sh"]

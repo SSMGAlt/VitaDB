@@ -1,9 +1,5 @@
 #!/bin/sh
-# Runs every time the container starts, after /var/www/html has already been
-# bind-mounted from the git checkout. screenshots.php, icon0.php, and
-# avatar.php write to a hardcoded absolute path (see deploy/README.md); these
-# symlinks make that same content reachable at the relative web paths
-# (icons/..., avatars/..., screenshots/...) the Angular templates use.
+# symlinks uploads/ to the web-relative paths templates expect
 set -e
 
 UPLOAD_ROOT="/customers/8/5/0/rinnegatamante.it/httpd.www/vitadb"

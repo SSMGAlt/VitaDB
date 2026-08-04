@@ -1,12 +1,6 @@
 name: CodeQL
 
-# NOTE: CodeQL does not support PHP (GitHub confirms this explicitly in their
-# docs). Most of this app's actual attack surface - submit.php, register.php,
-# login.php, avatar.php/icon0.php/screenshots.php, etc. - is PHP and is NOT
-# covered by this workflow. This only analyzes the client-side JavaScript
-# (app.js, the *.controller.js files). Consider a PHP-aware SAST tool
-# (e.g. Semgrep with the p/php or p/security-audit rulesets, or Psalm/PHPStan
-# for general static analysis) to cover the backend.
+# CodeQL doesn't support PHP - this only covers the frontend JS.
 
 on:
   push:

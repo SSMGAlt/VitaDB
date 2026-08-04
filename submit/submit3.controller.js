@@ -27,8 +27,7 @@ app.controller('submit3Controller',function($scope, $rootScope, $http, $location
 		if ($scope.conf.sshot != document.getElementById('sshot').value) $scope.conf.sshot = document.getElementById('sshot').value
 	}, 500)
 	
-	// Stop polling once the user navigates away - otherwise this keeps firing
-	// forever against form elements that no longer exist on the page
+	// stop polling on navigate away
 	$scope.$on('$destroy', function(){
 		$interval.cancel(theInterval)
 	})

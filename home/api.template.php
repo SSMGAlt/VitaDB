@@ -29,18 +29,18 @@
 						<div class="form-group">
 							<b>Get Homebrews List</b>: <br>
 							<ul>
-								<li>HTTP: <a href="http://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
-								<li>HTTPS: <a href="https://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li><b>HTTP</b>: http://vitadb.ssmg4.dpdns.org/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
+								<li><b>HTTPS</b>: https://vitadb.ssmg4.dpdns.org/list_hbs_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
 							</ul>
 							<b>Get Plugins List</b>: <br>
 							<ul>
-								<li>HTTP: <a href="http://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
-								<li>HTTPS: <a href="https://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li><b>HTTP</b>: http://vitadb.ssmg4.dpdns.org/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
+								<li><b>HTTPS</b>: https://vitadb.ssmg4.dpdns.org/list_plugins_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
 							</ul>
 							<b>Get PC Tools List</b>: <br>
 							<ul>
-								<li>HTTP: <a href="http://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">http://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
-								<li>HTTPS: <a href="https://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php">https://{{site_host}}/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</a></li>
+								<li><b>HTTP</b>: http://vitadb.ssmg4.dpdns.org/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
+								<li><b>HTTPS</b>: https://vitadb.ssmg4.dpdns.org/list_tools_{{cat_filter == 0 ? 'json' : 'yaml'}}.php</li>
 							</ul>
 						</div>
 					</fieldset>

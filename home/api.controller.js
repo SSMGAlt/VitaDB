@@ -8,6 +8,5 @@ app.controller('apiController',function($scope, $rootScope, $http, $routeParams,
 	]);
 	
 	$scope.cat_filter = "0"
-	$scope.site_host = $location.host()
 	
 })

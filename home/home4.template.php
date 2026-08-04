@@ -11,10 +11,10 @@
 				<span ng-repeat="entry in updates track by $index"><span ng-if="$index != 0"> - </span><b>{{entry.author}}</b> {{entry.object}} <b>{{entry.hb}}</b> on <b>{{entry.date}} GMT -1:00</b>.</span>
 			</div>
 		</ol>
-	</div>
 		<ol class="breadcrumb-alert">
 			<b>Note:</b> You can now download homebrews from VitaDB directly from your PSVITA by using <a href="https://www.rinnegatamante.eu/vitadb/#/info/877">VitaDB Downloader</a>.
 		</ol>
+	</div>
 	<br>
 	<div class="row">
 		<div class="col-md-4">
@@ -30,7 +30,12 @@
 			</select>
 		</div>
 		<div class="col-md-4">
-			<select style="display:inline-block;vertical-align:middle;" ng-model="sort_by" ng-options="opt.value as opt.label for opt in sortOptions" required="true" class="form-control"></select>
+			<select style="display:inline-block;vertical-align:middle;" ng-change="changeSort()" ng-model="sort_filter" required="true" class="form-control">
+				<option value=0>Most Recent</option>
+				<option value=1>Oldest</option>
+				<option value=2>Most Downloaded</option>
+				<option value=3>Least Downloaded</option>
+			</select>
 		</div>
 	</div>
 	<br>
