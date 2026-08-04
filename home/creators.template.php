@@ -2,7 +2,7 @@
 	<div class="row" id="top">
 		<ol class="breadcrumb">
 			<li>
-				<i class="fa fa-code" aria-hidden="true"></i> &nbsp;
+				<i class="fa fa-users" aria-hidden="true"></i> &nbsp;
 				Top 50 developers ranked by releases count
 			</li>
 		</ol>

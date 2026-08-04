@@ -8,6 +8,24 @@ app.controller('home3Controller',function($scope, $rootScope, $http, $routeParam
 	]);
 	
 	$scope.field = ''
+	$scope.sort_filter = "0"
+	$scope.sort_by = "-date"
+	$scope.changeSort = function () {
+		switch (Number($scope.sort_filter)){
+			case 1:
+				$scope.sort_by = "date"
+				break;
+			case 2:
+				$scope.sort_by = "-downloads"
+				break;
+			case 3:
+				$scope.sort_by = "downloads"
+				break;
+			default:
+				$scope.sort_by = "-date"
+				break;
+		}
+	}
 
 	$http.post('list_tools_json.php').then(function(res){
 		$scope.brews = res.data

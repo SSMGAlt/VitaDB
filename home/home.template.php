@@ -25,10 +25,8 @@
 				<option value=0>All Categories</option>
 				<option value=1>Original Games</option>
 				<option value=2>Game Ports</option>
-				<option value=3>Interpreters</option>
 				<option value=4>Utilities</option>
 				<option value=5>Emulators</option>
-				<option value=7>Engines</option>
 			</select>
 		</div>
 		<div class="col-md-4">

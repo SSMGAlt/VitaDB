@@ -17,10 +17,18 @@
 		<div class="col-md-4">
 			<input style="display:inline-block;vertical-align:middle;" type="text" ng-model="field" class="form-control" placeholder="Search..." required="true" />
 		</div>
+		<div class="col-md-4">
+			<select style="display:inline-block;vertical-align:middle;" ng-change="changeSort()" ng-model="sort_filter" required="true" class="form-control">
+				<option value=0>Most Recent</option>
+				<option value=1>Oldest</option>
+				<option value=2>Most Downloaded</option>
+				<option value=3>Least Downloaded</option>
+			</select>
+		</div>
 	</div>
 	<br>
 	<div class="row" id="hb-list">
-		<div ng-repeat="brew in brews | filter: filterBrews(field)" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+		<div ng-repeat="brew in brews | filter: filterBrews(field) | orderBy: sort_by" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 			<div class="panel panel-widget ">
 				<div class="row no-padding">
 					<div class="col-md-12">
