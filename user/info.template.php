@@ -76,6 +76,32 @@
 						</table>
 					</div>
 				</div>
+				<center><h4>PSP Homebrews made by this user:</h4></center>
+				<br>
+				<div class="row no-padding">
+					<div class="fixed-table-container">
+						<table data-toggle="table" class="table table-hover">
+							<thead>
+								<tr>
+									<th>Icon</th>
+									<th>Title</th>
+									<th>Last Update</th>
+									<th>Download</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="brew in conf.psp">
+									<td><a href="#/info/{{brew.id}}"><img class="icon" ng-src="icons/{{brew.icon}}" style="max-width: 64px;" /></a></td>
+									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
+									<td>{{brew.date}}</td>
+									<td>
+										<a href="{{brew.url}}"><input type="submit" value="Download Homebrew" class="btn btn-primary" /></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 				<center><h4>PC Tools made by this user:</h4></center>
 				<br>
 				<div class="row no-padding">
@@ -94,30 +120,6 @@
 									<td>{{brew.date}}</td>
 									<td>
 										<a href="{{brew.url}}"><input type="submit" value="Download Tool" class="btn btn-primary" /></a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<center><h4>PSP Homebrews made by this user:</h4></center>
-				<br>
-				<div class="row no-padding">
-					<div class="fixed-table-container">
-						<table data-toggle="table" class="table table-hover">
-							<thead>
-								<tr>
-									<th>Title</th>
-									<th>Last Update</th>
-									<th>Download</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="brew in conf.psp">
-									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
-									<td>{{brew.date}}</td>
-									<td>
-										<a href="{{brew.url}}"><input type="submit" value="Download Homebrew" class="btn btn-primary" /></a>
 									</td>
 								</tr>
 							</tbody>
