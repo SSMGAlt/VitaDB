@@ -37,8 +37,8 @@
 									<th>Download</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr ng-repeat="brew in conf.hbs">
+							<tbody ng-if="conf.hbs.length > 0">
+								<tr ng-repeat="brew in conf.hbs track by $index">
 									<td><a href="#/info/{{brew.id}}"><img class="icon" ng-src="icons/{{brew.icon}}" style="max-width: 64px;" /></a></td>
 									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
 									<td>{{brew.date}}</td>
@@ -64,8 +64,8 @@
 									<th>Download</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr ng-repeat="brew in conf.plugins">
+							<tbody ng-if="conf.plugins.length > 0">
+								<tr ng-repeat="brew in conf.plugins track by $index">
 									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
 									<td>{{brew.date}}</td>
 									<td>
@@ -89,8 +89,8 @@
 									<th>Download</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr ng-repeat="brew in conf.psp">
+							<tbody ng-if="conf.psp.length > 0">
+								<tr ng-repeat="brew in conf.psp track by $index">
 									<td><a href="#/info/{{brew.id}}"><img class="icon" ng-src="icons/{{brew.icon}}" style="max-width: 64px;" /></a></td>
 									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
 									<td>{{brew.date}}</td>
@@ -114,8 +114,8 @@
 									<th>Download</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr ng-repeat="brew in conf.tools">
+							<tbody ng-if="conf.tools.length > 0">
+								<tr ng-repeat="brew in conf.tools track by $index">
 									<td><a href="#/info/{{brew.id}}">{{brew.name}} {{brew.version}}</a></td>
 									<td>{{brew.date}}</td>
 									<td>

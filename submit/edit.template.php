@@ -61,8 +61,8 @@
 						</div>
 						<div class="form-group">
 							<select ng-model="conf.new_release" required="true" class="form-control">
-								<option value=1>Push a new tweet release</option>
-								<option value=2>Don't push a new tweet release</option>
+								<option value=1>Push a new Bluesky post</option>
+								<option value=2>Don't push a new Bluesky post</option>
 							</select>
 						</div>
 						<input type="text" id="email" style="height:0;width:0;padding:0;border:none;" ng-model="conf.user" />

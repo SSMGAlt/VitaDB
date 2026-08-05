@@ -107,60 +107,20 @@
 			mysqli_stmt_execute($sth3);
 			mysqli_stmt_close($sth3);
 			if ($new_release == 1) {
-				require_once ('codebird.php');
-				\Codebird\Codebird::setConsumerKey('', '');
-				$cb = \Codebird\Codebird::getInstance();
-				$cb->setToken('', '');
-				$authors = explode(' & ', $author);
-				$author = "";
-				$first = 1;
-				foreach ($authors as $person) {
-					if ($first != 1) {
-						$author = $author . " & ";
-					} else {
-						$first = 2;
-					}
-					$sth4 = mysqli_prepare($con,"SELECT twitter FROM vitadb_users WHERE name=?");
-					mysqli_stmt_bind_param($sth4, "s", $person);
-					mysqli_stmt_execute($sth4);
-					$data = mysqli_stmt_get_result($sth4);
-					if (mysqli_num_rows($data)>0){
-						while($r = mysqli_fetch_assoc($data)) {
-							$twitter = $r['twitter'];
-							if (strlen($twitter) > 2) {
-								$author = $author . "@" . $twitter;
-							} else {
-								$author = $author . $person;
-							}
+				require_once('bluesky.php');
+				$bsky = new Bluesky();
+				if ($bsky->login($bluesky_handle, $bluesky_app_password)) {
+					$post_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: " . current_site_url() . "/#/info/$hb_id";
+					if (strlen($sshot) > 5){
+						$screenshots = explode(';', $sshot);
+						$image_urls = array();
+						foreach ($screenshots as $screenshot) {
+							$image_urls[] = current_site_url() . "/" . $screenshot;
 						}
+						$bsky->post($post_text, $image_urls);
 					} else {
-						$author = $author . $person;
+						$bsky->post($post_text);
 					}
-					mysqli_stmt_close($sth4);
-				}
-				if (strlen($sshot) > 5){
-					$screenshots = explode(';', $sshot);
-					$cb->setRemoteDownloadTimeout(10000);
-					foreach ($screenshots as $screenshot) {
-						$sshot_url = current_site_url() . "/" . $screenshot;
-						$reply = $cb->media_upload(array(
-							'media' => $sshot_url
-						));
-						$media_ids[] = $reply->media_id_string;
-					}
-					$media_ids = implode(',', $media_ids);
-					$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: " . current_site_url() . "/#/info/$hb_id";
-					$reply = $cb->statuses_update([
-						'status' => $tweet_text,
-						'media_ids' => $media_ids
-					]);
-					print_r($reply);
-				} else {
-					$tweet_text = "$name $version by $author can now be downloaded from VitaDB! More info is available here: " . current_site_url() . "/#/info/$hb_id";
-					$reply = $cb->statuses_update([
-						'status' => $tweet_text
-					]);
-					print_r($reply);
 				}
 			}
 		}
