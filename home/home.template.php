@@ -21,7 +21,7 @@
 			<input style="display:inline-block;vertical-align:middle;" type="text" ng-model="field" class="form-control" placeholder="Search..." required="true" />
 		</div>
 		<div class="col-md-4">
-			<select style="display:inline-block;vertical-align:middle;" ng-change="changeView()" ng-model="cat_filter" required="true" class="form-control">
+			<select style="display:inline-block;vertical-align:middle;" ng-init="cat_filter = '0'" ng-change="changeView()" ng-model="cat_filter" required="true" class="form-control">
 				<option value=0>All Categories</option>
 				<option value=1>Original Games</option>
 				<option value=2>Game Ports</option>
@@ -30,7 +30,7 @@
 			</select>
 		</div>
 		<div class="col-md-4">
-			<select style="display:inline-block;vertical-align:middle;" ng-change="changeSort()" ng-model="sort_filter" required="true" class="form-control">
+			<select style="display:inline-block;vertical-align:middle;" ng-init="sort_filter = '0'" ng-change="changeSort()" ng-model="sort_filter" required="true" class="form-control">
 				<option value=0>Most Recent</option>
 				<option value=1>Oldest</option>
 				<option value=2>Most Downloaded</option>
