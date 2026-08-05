@@ -536,7 +536,7 @@ $.Tooltipster.prototype = {
 					$el;
 				
 				if (selector){
-					$el = $(selector);
+					$el = $($.find(selector));
 				}
 				
 				if ($el && $el[0]) {
