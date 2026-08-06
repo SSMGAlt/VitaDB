@@ -5,7 +5,13 @@
 	$con = mysqli_connect($servername, $username, $password, $dbname);
 	$xsrf = createXSRF($con);
 	mysqli_close($con);
-	setcookie("XSRF-TOKEN", $xsrf);
+	setcookie("XSRF-TOKEN", $xsrf, array(
+		'expires' => time() + 14400,
+		'path' => '/',
+		'secure' => true,
+		'httponly' => false, // frontend needs to read this to echo it back as a header
+		'samesite' => 'Lax'
+	));
 ?>
 <!DOCTYPE html>
 <html ng-app="VitaDB">
@@ -30,6 +36,12 @@
 			a, td, th, .dropdown-menu, .form-control {
 				font-family: 'Roboto', sans-serif !important;
 				font-weight: 300 !important;
+			}
+			/* .fixed-table-container always has a 1px border regardless of
+			   whether its table has any rows - this kills it for empty ones
+			   so there's no leftover strip under a header-only table. */
+			.fixed-table-container.no-rows {
+				border: none !important;
 			}
 		</style>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>

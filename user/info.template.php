@@ -27,7 +27,7 @@
 				<center><h4>Homebrews made by this user:</h4></center>
 				<br>
 				<div class="row no-padding">
-					<div class="fixed-table-container">
+					<div class="fixed-table-container" ng-class="{'no-rows': conf.hbs.length == 0}">
 						<table data-toggle="table" class="table table-hover">
 							<thead>
 								<tr>
@@ -55,7 +55,7 @@
 				<center><h4>Plugins made by this user:</h4></center>
 				<br>
 				<div class="row no-padding">
-					<div class="fixed-table-container">
+					<div class="fixed-table-container" ng-class="{'no-rows': conf.plugins.length == 0}">
 						<table data-toggle="table" class="table table-hover">
 							<thead>
 								<tr>
@@ -79,7 +79,7 @@
 				<center><h4>PSP Homebrews made by this user:</h4></center>
 				<br>
 				<div class="row no-padding">
-					<div class="fixed-table-container">
+					<div class="fixed-table-container" ng-class="{'no-rows': conf.psp.length == 0}">
 						<table data-toggle="table" class="table table-hover">
 							<thead>
 								<tr>
@@ -105,7 +105,7 @@
 				<center><h4>PC Tools made by this user:</h4></center>
 				<br>
 				<div class="row no-padding">
-					<div class="fixed-table-container">
+					<div class="fixed-table-container" ng-class="{'no-rows': conf.tools.length == 0}">
 						<table data-toggle="table" class="table table-hover">
 							<thead>
 								<tr>

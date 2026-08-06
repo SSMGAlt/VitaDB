@@ -66,12 +66,18 @@ CREATE TABLE IF NOT EXISTS `vitadb_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- One row per client IP; app does a manual check-then-insert/update.
+-- One row per issued CSRF token (not per IP - an IP can hold several valid
+-- tokens at once, e.g. multiple tabs). Expired ones are swept by xsrf.php
+-- itself on each new token issue, so this table doesn't grow unbounded.
 CREATE TABLE IF NOT EXISTS `vitadb_csrf` (
-  `id`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ip`     VARCHAR(45) NOT NULL, -- string form (supports IPv6), not ip2long'd
-  `token`  CHAR(64)    NOT NULL,
+  `id`          INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ip`          VARCHAR(45) NOT NULL, -- string form (supports IPv6), not ip2long'd
+  `token`       CHAR(64)    NOT NULL,
+  `expires_at`  DATETIME    NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_vitadb_csrf_ip` (`ip`)
+  UNIQUE KEY `uq_vitadb_csrf_token` (`token`),
+  KEY `idx_vitadb_csrf_ip` (`ip`),
+  KEY `idx_vitadb_csrf_expires` (`expires_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Audit trail written on every add/update to `vitadb`.

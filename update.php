@@ -72,7 +72,7 @@
 	include 'xsrf.php';
 	$xsrf = $_COOKIE['XSRF-TOKEN'];
 	$hdr_xsrf = $_SERVER['HTTP_X_XSRF_TOKEN'];
-	if ((strcmp($xsrf,$hdr_xsrf) != 0) or (!checkXSRF($con, $xsrf))){
+	if ((!is_string($xsrf)) or (!is_string($hdr_xsrf)) or (!hash_equals($xsrf, $hdr_xsrf)) or (!checkXSRF($con, $xsrf))){
 		mysqli_close($con);
 		die("Unauthorized access.");
 	}
