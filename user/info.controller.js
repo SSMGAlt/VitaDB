@@ -99,8 +99,10 @@ app.controller('infouserController',function ($scope, $rootScope, $http, $routeP
 					case 13:
 						$scope.conf.psp.push(res2.data[i])
 						break;
-					default:
+					case 8:
 						$scope.conf.plugins.push(res2.data[i])
+						break;
+					default:
 						break;
 				}			
 			}

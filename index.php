@@ -9,7 +9,7 @@
 		'expires' => time() + 14400,
 		'path' => '/',
 		'secure' => true,
-		'httponly' => false, // frontend needs to read this to echo it back as a header
+		'httponly' => false, // JS needs to read this
 		'samesite' => 'Lax'
 	));
 ?>
@@ -26,20 +26,14 @@
 		<link href="css/font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="js/dependencies/tooltipster-master/dist/css/tooltipster.bundle.min.css" />
 		<style>
-			/* Loaded after every other stylesheet on purpose, so it wins any
-			   specificity ties with Bootstrap/theme CSS instead of losing to
-			   whatever loads later. !important guarantees it regardless.
-			   code/kbd/pre are deliberately excluded - those should stay
-			   monospace. */
+			/* loads last so it wins over Bootstrap/theme CSS */
 			body, .navbar, .panel, .breadcrumb, .breadcrumb-alert, .btn,
 			h1, h2, h3, h4, h5, h6, input, select, textarea, label,
 			a, td, th, .dropdown-menu, .form-control {
 				font-family: 'Roboto', sans-serif !important;
 				font-weight: 300 !important;
 			}
-			/* .fixed-table-container always has a 1px border regardless of
-			   whether its table has any rows - this kills it for empty ones
-			   so there's no leftover strip under a header-only table. */
+			/* kills the empty-table border strip */
 			.fixed-table-container.no-rows {
 				border: none !important;
 			}

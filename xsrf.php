@@ -1,8 +1,5 @@
 <?
-	// Issues a fresh CSRF token. Cryptographically random (not rand()),
-	// time-limited, and inserted as a new row rather than overwriting the
-	// IP's existing one - an IP can hold several valid tokens at once, so
-	// multiple tabs/concurrent requests don't stomp on each other's token.
+	// random token, 4h expiry, one row per token (not per IP)
 	function createXSRF($con){
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$token = bin2hex(random_bytes(32));
@@ -13,13 +10,13 @@
 		mysqli_stmt_execute($sth);
 		mysqli_stmt_close($sth);
 
-		// best-effort cleanup so this table doesn't grow forever
+		// cleanup expired rows
 		mysqli_query($con, "DELETE FROM vitadb_csrf WHERE expires_at < NOW()");
 
 		return $token;
 	}
 
-	// Token must belong to this IP, match exactly, and not be expired.
+	// must match this IP, exact token, not expired
 	function checkXSRF($con, $client_token){
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$sth = mysqli_prepare($con,"SELECT id FROM vitadb_csrf WHERE ip=? AND token=? AND expires_at > NOW()");
